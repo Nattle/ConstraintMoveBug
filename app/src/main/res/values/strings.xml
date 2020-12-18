@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="bug">Move text, move icon, and move both work properly.\nMove Inner works propertly\nMove all fails to animate update inner\nMove all then move text animates only one inner block.</string>
+</resources>

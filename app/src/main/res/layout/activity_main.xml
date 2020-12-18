@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="co.move.ExampleViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="co.move.MainActivity">
+
+        <TextView
+            android:id="@+id/bug"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/bug"
+            android:textSize="20sp"
+            app:animateVertical="@{viewModel.textBias}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/included" />
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TEXT"
+            android:textSize="40sp"
+            app:animateVertical="@{viewModel.textBias}"
+            app:layout_constraintBottom_toTopOf="@id/buttonAll"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bug" />
+
+        <!-- Not sure why I can't-->
+        <!-- app:layout_constraintHorizontal_bias="@{viewModel.iconBias}"-->
+        <TextView
+            android:id="@+id/icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/black"
+            android:text="Icon"
+            android:textColor="@color/white"
+            app:animateHorizontal="@{viewModel.iconBias}"
+            app:animateVertical="@{viewModel.iconBias}"
+            app:layout_constraintBottom_toTopOf="@id/buttonAll"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bug"
+            app:layout_constraintVertical_bias="0.75" />
+
+        <Button
+            android:id="@+id/buttonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.clickText()}"
+            android:text="Move Text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <Button
+            android:id="@+id/buttonBoth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.clickBoth()}"
+            android:text="Move Icon + Text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <Button
+            android:id="@+id/buttonAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.clickAll()}"
+            android:text="Move Icon + Inner + Text"
+            app:layout_constraintBottom_toTopOf="@id/buttonBoth"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black"
+            android:padding="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#88FF88">
+
+                <TextView
+                    android:id="@+id/innerIcon"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:background="@color/teal_700"
+                    android:text="Inner+Linear"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    app:animateHorizontal="@{viewModel.innerIconBias}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#FF8888"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linear">
+
+            <TextView
+                android:id="@+id/innerIcon2"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:background="@color/teal_700"
+                android:text="Inner"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:animateHorizontal="@{viewModel.innerIconBias}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include
+            android:id="@+id/included"
+            layout="@layout/wrapper"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:viewModel="@{viewModel}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/container2"/>
+
+
+        <Button
+            android:id="@+id/buttonIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.clickIcon()}"
+            android:text="Move Icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <Button
+            android:id="@+id/buttonIconInner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.clickInner()}"
+            android:text="Move inner"
+            app:layout_constraintBottom_toTopOf="@id/buttonIcon"
+            app:layout_constraintRight_toRightOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
